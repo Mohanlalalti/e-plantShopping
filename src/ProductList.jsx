@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
-    const [addedToCart, setAddedToCart] = useState({});
+    const isInCart = (plantName) => cartItems.some(item => item.name === plantName);
     const dispatch = useDispatch();
     const cartItems = useSelector(state => state.cart.items);
     const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
@@ -304,9 +304,9 @@ function ProductList({ onHomeClick }) {
                 <button  
                 className="product-button" 
                 onClick={() => handleAddToCart(plant)}
-                disabled={addedToCart[plant.name]}
+                disabled={isInCart(plant.name)}
                 >
-                {addedToCart[plant.name] ? "Added" : "Add to Cart"}
+                {isInCart(plant.name) ? "Added" : "Add to Cart"}
                 </button>
             </div>
             ))}
