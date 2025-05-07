@@ -4,14 +4,16 @@ import CartItem from './CartItem';
 import { useDispatch } from 'react-redux';
 import { addItem } from './CartSlice'; // Ensure correct path to CartSlice
 import { useSelector } from 'react-redux';
+
+
 function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
+    const [addedToCart, setAddedToCart] = useState({});
+    const cartItems = useSelector(state => state.cart.items);
     const isInCart = (plantName) => cartItems.some(item => item.name === plantName);
     const dispatch = useDispatch();
-    const cartItems = useSelector(state => state.cart.items);
     const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-
     const plantsArray = [
         {
             category: "Air Purifying Plants",
@@ -225,7 +227,7 @@ function ProductList({ onHomeClick }) {
         padding: '15px',
         display: 'flex',
         justifyContent: 'space-between',
-        alignIems: 'center',
+        alignItems: 'center',
         fontSize: '20px',
     }
     const styleObjUl = {
