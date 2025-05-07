@@ -9,6 +9,8 @@ const CartItem = ({ onContinueShopping }) => {
   const cart = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
 
+  const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+
   // Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
     let total = 0;
@@ -53,12 +55,16 @@ const CartItem = ({ onContinueShopping }) => {
 
   // ✅ Placeholder for checkout functionality
   const handleCheckoutShopping = (e) => {
-    alert('Functionality to be added for future reference');
-  };
+    e.preventDefault(); // Optional, for consistency
+  alert('🛒 Checkout functionality coming soon!');
+  }
 
   return (
     <div className="cart-container">
       <h2 style={{ color: 'black' }}>Total Cart Amount: ${calculateTotalAmount()}</h2>
+      <h3 style={{ color: 'black' }}>
+  Products Selected: {totalItems} {totalItems === 1 ? "item" : "items"}
+      </h3>
       <div>
         {cart.map(item => (
           <div className="cart-item" key={item.name}>
@@ -81,7 +87,11 @@ const CartItem = ({ onContinueShopping }) => {
       <div className="continue_shopping_btn">
         <button className="get-started-button" onClick={(e) => handleContinueShopping(e)}>Continue Shopping</button>
         <br />
-        <button className="get-started-button1">Checkout</button>
+        <button className="get-started-button1"
+        onClick={handleCheckoutShopping}
+        disabled={cart.length === 0}>
+        Checkout
+        </button>
       </div>
     </div>
   );
