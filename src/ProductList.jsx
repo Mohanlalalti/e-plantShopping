@@ -235,12 +235,19 @@ function ProductList({ onHomeClick }) {
         justifyContent: 'space-between',
         alignItems: 'center',
         width: '1100px',
+        gap: '20px',
     }
     const styleA = {
         color: 'white',
-        fontSize: '30px',
+        fontSize: '20px',
         textDecoration: 'none',
     }
+
+    const styleImage = {
+        marginRight: '20px',  // Add space to the right of the image
+        width: '50px',        // Adjust image size as needed
+        height: '50px',       // Adjust image size as needed
+    };
 
     const handleHomeClick = (e) => {
         e.preventDefault();
@@ -269,24 +276,36 @@ function ProductList({ onHomeClick }) {
            [product.name]: true, // Set the product name as key and value as true to indicate it's added to cart
          }));
       };
+
+      
     
     return (
         <div>
             <div className="navbar" style={styleObj}>
                 <div className="tag">
-                    <div className="luxury">
-                        <img src="https://cdn.pixabay.com/photo/2020/08/05/13/12/eco-5465432_1280.png" alt="" />
-                        <a href="/" onClick={(e) => handleHomeClick(e)}>
-                            <div>
-                                <h3 style={{ color: 'white' }}>Paradise Nursery</h3>
-                                <i style={{ color: 'white' }}>Where Green Meets Serenity</i>
-                            </div>
-                        </a>
-                    </div>
+                <div className="luxury">
+                 <img 
+                src="https://cdn.pixabay.com/photo/2020/08/05/13/12/eco-5465432_1280.png" 
+                alt="" 
+                style={{ marginRight: '20px' }}
+                />
+                <a href="/" onClick={(e) => handleHomeClick(e)}>
+                <div>
+                 <h3 style={{ color: 'white', margin: '0' }}>Paradise Nursery</h3>
+                    <i style={{ color: 'white', fontSize: '12px', marginTop: '2px', display: 'block' }}>
+                Where Green Meets Serenity
+            </i>
+        </div>
+    </a>
+</div>
 
                 </div>
                 <div style={styleObjUl}>
-                    <div> <a href="#" onClick={(e) => handlePlantsClick(e)} style={styleA}>Plants</a></div>
+                <div style={{ flexGrow: 1, textAlign: 'center' }}>
+                    <a href="#" onClick={(e) => handlePlantsClick(e)} style={{ ...styleA, display: 'inline-block' }}>
+                        Plants
+                    </a>
+                </div>
                     <div> <a href="#" onClick={(e) => handleCartClick(e)} 
                     style={styleA}><h1 className='cart'>
                         {totalQuantity > 0 && (
